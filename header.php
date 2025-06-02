@@ -23,17 +23,21 @@ if($_SESSION['uid'] != 0) {
 <head>
   <meta charset="UTF-8">
   <title>BFW TICKET SYSTEM</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <header class="topbar">
     <div class="logo">BFW TICKET SYSTEM</div>
     <nav>
-      <a href="create_ticket.php">Ticket erstellen</a>
-      <?php if ($user['role'] === 'admin'): ?>
+      <?php if ($_SESSION['uid'] === 0): ?>
+        <a href="signup.php">Konto erstellen</a>
+      <?php elseif ($_SESSION['uid'] !== 0 && $user->getRole() === 'admin'): ?>
         <a href="admin_user.php">Benutzerverwaltung</a>
         <a href="admin_stats.php">Statistik</a>
+      <?php elseif ($_SESSION['uid'] !== 0): ?>
+        <a href="create_ticket.php">Ticket erstellen</a>
+        <a href="logout.php" id="logoutBtn">Abmelden</a>
       <?php endif; ?>
-      <a href="logout.php" id="logoutBtn">Abmelden</a>
     </nav>
   </header>
+  <body>

@@ -54,7 +54,7 @@ if(!file_exists('../assets/config')) {
         // create tables
         define('SECURE_ACCESS', true);
         include_once ("../classes/Database.php");
-        $configs = include('../ressources/config');
+        $configs = include('../assets/config');
 
         $db = new Database($configs['host'], $configs['user'], $configs['pwd'], $configs['db']);
 
