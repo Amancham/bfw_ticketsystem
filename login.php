@@ -3,12 +3,11 @@ include ('header.php');
 ?>
 
 <div class="login-page">
-    <!-- TODO: Add option per page for body class and title without having to take the header apart -->
   <div class="login-box">
     <h2>BFW TICKET SYSTEM</h2>
-    <form id="loginForm">
-      <label for="username">Benutzername</label>
-      <input type="text" id="username" name="username" required>
+    <form id="loginForm" action="login.php" method="post">
+      <label for="email">E-Mail Adresse</label>
+      <input type="email" id="email" name="email" required>
 
       <label for="password">Passwort</label>
       <input type="password" id="password" name="password" required>
@@ -29,4 +28,14 @@ include ('header.php');
 
 <?php 
 include ('footer.php');
+if(!empty($_POST['email']) && !empty($_POST['password'])) {
+  if($db->check_login($_POST['email'], $_POST['password']) === false) {
+      header("Location:login.php");
+      die();
+  }
+  else {
+      $user_id = $db->do_login($_POST['email']);
+      header("Refresh: 0; url = index.php");
+  }
+}
 ?>

@@ -29,6 +29,7 @@ if($_SESSION['uid'] != 0) {
   <header class="topbar">
     <div class="logo">BFW TICKET SYSTEM</div>
     <nav>
+      <a href="index.php">Home</a>
       <?php if ($_SESSION['uid'] === 0): ?>
         <a href="signup.php">Konto erstellen</a>
       <?php elseif ($_SESSION['uid'] !== 0 && $user->getRole() === 'admin'): ?>

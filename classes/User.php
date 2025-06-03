@@ -46,17 +46,17 @@ class User {
         $this->uid = $uid;
     }
 
-    public function getName() {
+    public function getUsername() {
         return $this->username;
     }
-    public function setName($username) {
+    public function setUsername($username) {
         $this->username = $username;
     }
 
-    public function getPwd() {
+    public function getPassword() {
         return $this->password;
     }
-    public function setPwd($password) {
+    public function setPassword($password) {
         $this->password = $password;
     }
 
