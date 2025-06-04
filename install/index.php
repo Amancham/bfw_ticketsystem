@@ -62,11 +62,35 @@ if(!file_exists('../assets/config')) {
         $db->getPdo()->exec($sql);
         echo("All tables were created successfully");
 
-        $db = null;
+        echo('<h1>Admin account</h1>');
 
-        file_put_contents(
-            'lock',
-            'Installation locked'
-        );
-        header("Location: ../index.php");
+        echo('<form action="index.php?add=admin_done" method="post">');
+        echo('<fieldset>');
+        echo('<legend>Admin account</legend>');
+        echo('<label for="name">Name</label><br/>');
+        echo('<input type="text" id="name" name="name"><br/>');
+        echo('<label for="email">E-Mail</label><br/>');
+        echo('<input type="email" id="email" name="email"><br/>');
+        echo('<label for="pwd">Password</label><br/>');
+        echo('<input type="password" id="pwd" name="pwd"><br/>');
+        echo('</fieldset>');
+        echo('<input type="submit" name="Submit">');
+        echo('</form>');
+
+        if((isset($_POST['name']) && isset($_POST['email']) && isset($_POST['pwd'])) && 
+        (!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['pwd']))) {
+            $pwd_hashed = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
+            $create_admin = "INSERT INTO user (username, email, password, role) VALUES ('".$_POST['name']."', '".$_POST['email']."', '".$pwd_hashed."', 'admin');";
+            $db->getPdo()->exec($create_admin);
+
+            echo("<p>Admin-Account created successfully.</p>");
+
+            $db = null;
+
+            file_put_contents(
+                'lock',
+                'Installation locked'
+            );
+            header("Location: ../index.php");
+        }
     }
