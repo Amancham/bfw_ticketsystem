@@ -148,5 +148,7 @@ class Database {
         $_SESSION['uid'] = $new_id;
         return $this->load_user($new_id);
     }
+
+    
     
 }
