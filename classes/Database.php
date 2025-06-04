@@ -149,13 +149,27 @@ class Database {
         return $this->load_user($new_id);
     }
 
+    // ticket related functions
     public function createTicket($title, $description, $priority, $uid, $cid, )
     {
-        //$db = new Database('localhost', 'singh', '', 'database');
-        
-        
         $stmt = $this->pdo->prepare("INSERT INTO ticket (title, description, priority, uid, cid) VALUES (?, ?, ?, ?, ?)");
         $stmt->execute([$title, $description, $priority, $uid, $cid]);
+    }
+
+    public function list_my_tickets($uid) {
+        $stmt = $this->pdo->prepare("SELECT * FROM ticket WHERE uid = ?");
+        $stmt->execute([$uid]);
+        return $stmt->fetchAll();
+    }
+
+    public function list_all_tickets() {
+        $stmt = $this->pdo->query("SELECT * FROM ticket ORDER BY priority DESC, status");
+        return $stmt->fetchAll();
+    }
+
+    public function list_open_tickets() {
+        $stmt = $this->pdo->query("SELECT * FROM ticket WHERE status = 'neu' OR status = 'in_bearbeitung' ORDER BY priority DESC");
+        return $stmt->fetchAll();
     }
     
     // admin-related functions
