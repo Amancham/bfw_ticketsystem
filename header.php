@@ -35,6 +35,8 @@ if($_SESSION['uid'] != 0) {
       <?php elseif ($_SESSION['uid'] !== 0 && $user->getRole() === 'admin'): ?>
         <a href="admin_user.php">Benutzerverwaltung</a>
         <a href="admin_stats.php">Statistik</a>
+        <a href="create_ticket.php">Ticket erstellen</a>
+        <a href="logout.php" id="logoutBtn">Abmelden</a>
       <?php elseif ($_SESSION['uid'] !== 0): ?>
         <a href="create_ticket.php">Ticket erstellen</a>
         <a href="logout.php" id="logoutBtn">Abmelden</a>
