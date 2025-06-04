@@ -1,7 +1,8 @@
 <?php
 include ('header.php');
 ?>
-
+<div class="dashboard">
+  
 <div class="login-page">
   <div class="login-box">
     <h2>BFW TICKET SYSTEM</h2>
@@ -38,4 +39,5 @@ if(!empty($_POST['email']) && !empty($_POST['password'])) {
       header("Refresh: 0; url = index.php");
   }
 }
+ 
 ?>
