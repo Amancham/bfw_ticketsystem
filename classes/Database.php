@@ -158,4 +158,14 @@ class Database {
         $stmt->execute([$title, $description, $priority, $uid, $cid]);
     }
     
+    // admin-related functions
+    public function list_users() {
+        $stmt = $this->pdo->query("SELECT uid, username,  role FROM user ORDER BY role DESC, username ASC");
+        return $stmt->fetchAll();
+    }
+
+    public function update_user($new_role, $uid) {
+        $stmt = $this->pdo->prepare("UPDATE user SET role = ? WHERE uid = ?");
+        $stmt->execute([$new_role, $uid]);
+    }
 }
