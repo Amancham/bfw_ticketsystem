@@ -1,14 +1,7 @@
 
 <?php
 include 'header.php';
-//not nessery need require_once
-// chhacking first
 
-//require_once 'classes/Database.php';
-//require_once 'classes/User.php';
-
-
-$db = new Database('localhost', 'singh', '', 'database');
 $categories = $db->getPdo()->query("SELECT cid, name FROM category")->fetchAll();
 ?>
 <main class="dashboard">
@@ -45,7 +38,8 @@ $categories = $db->getPdo()->query("SELECT cid, name FROM category")->fetchAll()
   </main>
  <?php include 'footer.php'; 
 
- if (!empty($_POST['title'])){
+ if (!empty($_POST['title']) && !empty($_POST['description']) && !empty($_POST['priority']) && !empty($_POST['cid']))
+ {
   $db -> createTicket($_POST['title'],$_POST['description'],$_POST['priority'],$user->getUid(),$_POST['cid']);
  }
 

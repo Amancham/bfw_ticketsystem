@@ -149,6 +149,13 @@ class Database {
         return $this->load_user($new_id);
     }
 
-    
+    public function createTicket($title, $description, $priority, $uid, $cid, )
+    {
+        //$db = new Database('localhost', 'singh', '', 'database');
+        
+        
+        $stmt = $this->pdo->prepare("INSERT INTO ticket (title, description, priority, uid, cid) VALUES (?, ?, ?, ?, ?)");
+        $stmt->execute([$title, $description, $priority, $uid, $cid]);
+    }
     
 }
