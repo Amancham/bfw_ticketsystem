@@ -42,7 +42,7 @@ if (!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['pass
         die();
     } else {
         $user = $db->do_login($_POST['email']);
-        header("refresh: 0; url = index.php");
+        header("refresh: 1.5; url = index.php");
     }
 }
 ?>

@@ -40,6 +40,7 @@ if ($_SESSION['uid'] != 0) {
       <?php if ($_SESSION['uid'] === 0): ?>
         <a href="signup.php">Konto erstellen</a>
       <?php elseif ($_SESSION['uid'] !== 1 && $user->getRole() === 'admin'): ?>
+       
         <a href="">Benutzerverwaltung</a>
         <a href="">Statistik</a>
         <a href="create_ticket.php">Ticket erstellen</a>

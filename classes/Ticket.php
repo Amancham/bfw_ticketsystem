@@ -1,6 +1,7 @@
-<?php 
+<?php
 
-class Ticket {
+class Ticket
+{
     private $tid;
     private $title;
     private $description;
@@ -11,5 +12,7 @@ class Ticket {
     private $created_at;
 
     // constructor, getter and setter 
-    
+
+
 }
+   
