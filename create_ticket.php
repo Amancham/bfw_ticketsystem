@@ -2,7 +2,7 @@
 <?php
 include 'header.php';
 
-$categories = $db->getPdo()->query("SELECT cid, name FROM category")->fetchAll();
+$categories = $db->getPdo()->query("SELECT cid, name FROM category ORDER BY name ASC")->fetchAll();
 ?>
 <main class="login-page">
     <form action="create_ticket.php" method="post" id="ticketForm" class="ticket-form">
@@ -41,8 +41,5 @@ $categories = $db->getPdo()->query("SELECT cid, name FROM category")->fetchAll()
  {
   $db -> createTicket($_POST['title'],$_POST['description'],$_POST['priority'],$user->getUid(),$_POST['cid']);
  }
-
- 
- 
- ?>
+?>
   
