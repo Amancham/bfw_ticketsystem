@@ -29,17 +29,17 @@ if($_SESSION['uid'] != 0) {
   <header class="topbar">
     <div class="logo">BFW TICKET SYSTEM</div>
     <nav>
-      <a href="index.php">Home</a>
+      <a href="index.php" class="navlinks">Home</a>
       <?php if ($_SESSION['uid'] === 0): ?>
-        <a href="signup.php">Konto erstellen</a>
+        <a href="signup.php" class="navlinks">Konto erstellen</a>
       <?php elseif ($_SESSION['uid'] !== 0 && $user->getRole() === 'admin'): ?>
-        <a href="admin_user.php">Benutzerverwaltung</a>
-        <a href="admin_stats.php">Statistik</a>
-        <a href="create_ticket.php">Ticket erstellen</a>
-        <a href="logout.php" id="logoutBtn">Abmelden</a>
+        <a href="admin_user.php" class="navlinks">Benutzerverwaltung</a>
+        <a href="admin_stats.php" class="navlinks">Statistik</a>
+        <a href="create_ticket.php" class="navlinks">Ticket erstellen</a>
+        <a href="logout.php" id="logoutBtn" class="navlink_logout">Abmelden</a>
       <?php elseif ($_SESSION['uid'] !== 0): ?>
-        <a href="create_ticket.php">Ticket erstellen</a>
-        <a href="logout.php" id="logoutBtn">Abmelden</a>
+        <a href="create_ticket.php" class="navlinks">Ticket erstellen</a>
+        <a href="logout.php" id="logoutBtn" class="navlink_logout">Abmelden</a>
       <?php endif; ?>
     </nav>
   </header>

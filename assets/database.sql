@@ -31,10 +31,11 @@ CREATE TABLE IF NOT EXISTS ticket_note (
     tid INT NOT NULL,
     uid INT NOT NULL,
     note TEXT NOT NULL,
-    created_at DATETIME NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (tid) REFERENCES ticket(tid),
     FOREIGN KEY (uid) REFERENCES user(uid)
 );
+
 CREATE TABLE IF NOT EXISTS ticket_supporter (
     sid INT AUTO_INCREMENT PRIMARY KEY,
     tid INT,

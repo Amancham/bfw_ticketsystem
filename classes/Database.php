@@ -163,13 +163,83 @@ class Database {
     }
 
     public function list_all_tickets() {
-        $stmt = $this->pdo->query("SELECT * FROM ticket ORDER BY priority DESC, status");
+        $stmt = $this->pdo->query("SELECT * FROM ticket ORDER BY status ASC, priority DESC");
         return $stmt->fetchAll();
     }
 
     public function list_open_tickets() {
         $stmt = $this->pdo->query("SELECT * FROM ticket WHERE status = 'neu' OR status = 'in_bearbeitung' ORDER BY priority DESC");
         return $stmt->fetchAll();
+    }
+
+    public function show_ticket($ticket_id) {
+        $stmt = $this->pdo->prepare("
+        SELECT * FROM ticket t 
+        LEFT JOIN user u ON t.uid = u.uid 
+        WHERE t.tid = ? 
+        ");
+        $stmt->execute([$ticket_id]);
+        $tickets = $stmt->fetchAll();
+        foreach($tickets as $row) {
+            return $row;
+        }
+    }
+
+    public function show_notes($ticket_id) {
+        $stmt = $this->pdo->prepare("
+        SELECT * FROM ticket_note n
+        LEFT JOIN user u ON n.uid = u.uid
+        WHERE tid = ? 
+        ORDER BY n.created_at DESC
+        ");
+        $stmt->execute([$ticket_id]);
+        return $stmt->fetchAll();
+    }
+
+    public function edit_ticket($ticket_id) {
+        // not implemented due to time constraints
+    }
+
+    public function add_note($ticket_id, $uid, $note) {
+        $stmt = $this->pdo->prepare("INSERT INTO ticket_note (tid, uid, note) VALUES (?, ?, ?)");
+        $stmt->execute([$ticket_id, $uid, $note]);
+    }
+
+    public function check_status($ticket_id, $status) {
+        $check = $this->pdo->prepare("
+        SELECT status FROM ticket WHERE tid = ?
+        ");
+        $check->execute([$ticket_id]);
+        foreach ($check as $c) {
+            if($c['status'] !== $status) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+
+    public function edit_status($ticket_id, $status) {
+        $stmt = $this->pdo->prepare("UPDATE ticket SET status = ? WHERE tid = ?");
+        $stmt->execute([$status, $ticket_id]);
+    }
+
+    public function check_supporter($ticket_id, $uid) {
+        $check = $this->pdo->prepare("SELECT sid FROM ticket_supporter WHERE tid = ? AND uid = ?");
+        $check->execute([$ticket_id, $uid]);
+        $check_rows = $check->rowCount();
+        if($check_rows > 0) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    public function add_supporter($ticket_id, $uid) {
+        $stmt = $this->pdo->prepare("INSERT INTO ticket_supporter (tid, uid) VALUES (?, ?)");
+        $stmt->execute([$ticket_id, $uid]);
     }
     
     // admin-related functions
