@@ -171,6 +171,3 @@ else {
 <?php endif; ?>
 
 </main>
-<?php 
-include ('footer.php');
-?>
