@@ -4,6 +4,7 @@ include 'header.php';
 
 $categories = $db->getPdo()->query("SELECT cid, name FROM category ORDER BY name ASC")->fetchAll();
 ?>
+
 <main class="login-page">
     <form action="create_ticket.php" method="post" id="ticketForm" class="ticket-form">
       <h2>Neues Ticket erstellen</h2>
