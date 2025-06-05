@@ -2,7 +2,7 @@
 <?php
 include 'header.php';
 
-$categories = $db->getPdo()->query("SELECT cid, name FROM category")->fetchAll();
+$categories = $db->getPdo()->query("SELECT cid, name FROM category ORDER BY name ASC")->fetchAll();
 ?>
 <main class="dashboard">
     <h2>Neues Ticket erstellen</h2>
@@ -25,7 +25,8 @@ $categories = $db->getPdo()->query("SELECT cid, name FROM category")->fetchAll()
       <label for="cid">Kategorie</label>
       <select name="cid" id="cid">
         <option value="">-- Keine --</option>
-        <?php foreach ($categories as $cat): ?>
+        <?php 
+          foreach ($categories as $cat): ?>
           <option value="<?= $cat['cid'] ?>"><?= htmlspecialchars($cat['name']) ?></option>
         <?php endforeach; ?>
       </select>
@@ -42,8 +43,5 @@ $categories = $db->getPdo()->query("SELECT cid, name FROM category")->fetchAll()
  {
   $db -> createTicket($_POST['title'],$_POST['description'],$_POST['priority'],$user->getUid(),$_POST['cid']);
  }
-
- 
- 
- ?>
+?>
   
