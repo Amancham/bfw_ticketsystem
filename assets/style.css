@@ -51,7 +51,10 @@ body {
 .login-box button:hover {
   background-color: #cc8400;
 }
-
+button{
+  padding: 7px;
+  margin-top: 20px;
+}
 .error-msg {
   color: red;
   margin-top: 1em;

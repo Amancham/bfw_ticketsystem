@@ -7,6 +7,3 @@ if($_SESSION['uid'] === 0) {
 <main class="dashboard">
 
 </main>
-<?php 
-include ('footer.php');
-?>

@@ -15,9 +15,13 @@ $db = new Database($configs['host'], $configs['user'], $configs['pwd'], $configs
 
 if($_SESSION['uid'] != 0) {
     $user = $db->load_user($_SESSION['uid']);
+    
 }
+// Prioritäten werden aktualisiert!
+$db->updatePriorities();
 
 ?>
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -26,6 +30,7 @@ if($_SESSION['uid'] != 0) {
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+<main class="dashboard">
   <header class="topbar">
     <div class="logo">BFW TICKET SYSTEM</div>
     <nav>
@@ -33,14 +38,16 @@ if($_SESSION['uid'] != 0) {
       <?php if ($_SESSION['uid'] === 0): ?>
         <a href="signup.php">Konto erstellen</a>
       <?php elseif ($_SESSION['uid'] !== 0 && $user->getRole() === 'admin'): ?>
+         <a href="admin_category.php">Kategories</a>
         <a href="admin_user.php">Benutzerverwaltung</a>
         <a href="admin_stats.php">Statistik</a>
         <a href="create_ticket.php">Ticket erstellen</a>
         <a href="logout.php" id="logoutBtn">Abmelden</a>
+
       <?php elseif ($_SESSION['uid'] !== 0): ?>
         <a href="create_ticket.php">Ticket erstellen</a>
         <a href="logout.php" id="logoutBtn">Abmelden</a>
       <?php endif; ?>
     </nav>
   </header>
-  <body>
+   
